@@ -1,0 +1,764 @@
+@use "variables" as *;
+
+// ---------------------------------------------
+// ボタン
+// ---------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 28px;
+  border: 0;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+  &--primary {
+    background: $color-primary-strong;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba($color-primary, 0.35);
+
+    &:hover {
+      background: $color-primary-dark;
+      transform: translateY(-2px);
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+    border: 1px solid $color-border;
+
+    &:hover {
+      background: $color-surface-2;
+    }
+  }
+
+  &--block {
+    width: 100%;
+  }
+}
+
+// ---------------------------------------------
+// ヘッダー・ハンバーガーメニュー
+// ---------------------------------------------
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: $header-h;
+
+  // backdrop-filter を header 本体に付けると、中の position: fixed のメニューが
+  // header の高さに閉じ込められるため、背景は疑似要素に描く
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    background: rgba($color-bg, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid $color-border;
+    transition: opacity 0.3s ease;
+  }
+
+  &.is-scrolled::before {
+    opacity: 1;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &__logo {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+
+    span {
+      color: $color-primary;
+    }
+  }
+}
+
+.hamburger {
+  position: relative;
+  z-index: 110;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  @include mq(lg) {
+    display: none;
+  }
+
+  &__line {
+    position: absolute;
+    left: 10px;
+    width: 24px;
+    height: 2px;
+    background: $color-text;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+
+    &:nth-child(1) {
+      top: 14px;
+    }
+
+    &:nth-child(2) {
+      top: 21px;
+    }
+
+    &:nth-child(3) {
+      top: 28px;
+    }
+  }
+
+  &[aria-expanded="true"] &__line {
+    &:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+}
+
+.gnav {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba($color-bg, 0.97);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @include mq(lg) {
+    position: static;
+    display: block;
+    background: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__list {
+    display: grid;
+    gap: 24px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    @include mq(lg) {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+  }
+
+  &__link {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-decoration: none;
+
+    @include mq(lg) {
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+// ---------------------------------------------
+// ヒーロー
+// ---------------------------------------------
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  min-height: 100svh;
+  padding-top: $header-h;
+  overflow: hidden;
+  align-items: center;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(60% 50% at 80% 20%, rgba($color-accent, 0.45), transparent 70%),
+      radial-gradient(50% 40% at 10% 80%, rgba($color-primary, 0.35), transparent 70%),
+      $color-bg;
+  }
+
+  &__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    animation: float 8s ease-in-out infinite;
+
+    &--1 {
+      top: 18%;
+      right: 8%;
+      width: 120px;
+      height: 120px;
+      background: linear-gradient(135deg, $color-primary, $color-accent);
+    }
+
+    &--2 {
+      bottom: 6%;
+      left: -16px;
+      width: 72px;
+      height: 72px;
+
+      @include mq(md) {
+        bottom: 14%;
+        left: 6%;
+      }
+      background: linear-gradient(135deg, $color-accent, #41d1ff);
+      animation-delay: -3s;
+    }
+  }
+
+  &__title {
+    font-size: clamp(2rem, 1.2rem + 4vw, 3.75rem);
+    line-height: 1.3;
+
+    // 語の途中で改行させない（文節ごとに折り返す）
+    span {
+      display: inline-block;
+    }
+
+    em {
+      font-style: normal;
+      background: linear-gradient(90deg, $color-primary, $color-accent);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  }
+
+  &__lead {
+    max-width: 36em;
+    margin-top: 24px;
+    color: $color-text-sub;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  &__note {
+    margin-top: 16px;
+    color: $color-text-sub;
+    font-size: 0.85rem;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+// ---------------------------------------------
+// 特長
+// ---------------------------------------------
+.features {
+  &__list {
+    display: grid;
+    gap: 24px;
+    margin: 48px 0 0;
+    padding: 0;
+    list-style: none;
+
+    @include mq(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__item {
+    padding: 32px 24px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-m;
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    color: $color-primary;
+  }
+
+  &__title {
+    margin-top: 16px;
+    font-size: 1.15rem;
+  }
+
+  &__text {
+    margin-top: 8px;
+    color: $color-text-sub;
+    font-size: 0.95rem;
+  }
+}
+
+// ---------------------------------------------
+// スライダー
+// ---------------------------------------------
+.slider {
+  position: relative;
+  margin-top: 48px;
+
+  &__viewport {
+    overflow: hidden;
+    border-radius: $radius-m;
+  }
+
+  &__track {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: transform 0.5s ease;
+  }
+
+  &__slide {
+    flex: 0 0 85%;
+
+    @include mq(md) {
+      flex-basis: calc((100% - 16px) / 2);
+    }
+
+    @include mq(lg) {
+      flex-basis: calc((100% - 32px) / 3);
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+
+  &__arrows {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__arrow {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1px solid $color-border;
+    border-radius: 50%;
+    background: $color-surface;
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  // タップ領域は 24px 以上確保し、見た目のドットは疑似要素で小さく描く
+  &__dot {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 8px;
+      border-radius: 50%;
+      background: $color-border;
+      transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    &[aria-current="true"]::before {
+      background: $color-primary;
+      transform: scale(1.3);
+    }
+  }
+}
+
+.work {
+  height: 100%;
+  overflow: hidden;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-m;
+
+  &__thumb {
+    aspect-ratio: 16 / 9;
+    display: grid;
+    place-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+
+    &--live {
+      background: linear-gradient(135deg, #ff5c8a, #ffb36b);
+    }
+
+    &--movie {
+      background: linear-gradient(135deg, #7c6cff, #41d1ff);
+    }
+
+    &--anime {
+      background: linear-gradient(135deg, #3ddc97, #41d1ff);
+    }
+
+    &--stage {
+      background: linear-gradient(135deg, #ffb36b, #7c6cff);
+    }
+
+    &--music {
+      background: linear-gradient(135deg, #ff5c8a, #7c6cff);
+    }
+  }
+
+  &__body {
+    padding: 20px;
+  }
+
+  &__tag {
+    color: $color-primary;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  &__title {
+    margin-top: 4px;
+    font-size: 1.05rem;
+  }
+}
+
+// ---------------------------------------------
+// 料金（月額／年額の切り替え）
+// ---------------------------------------------
+.pricing {
+  &__toggle {
+    display: inline-flex;
+    margin-top: 32px;
+    padding: 4px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: 999px;
+  }
+
+  &__toggle-btn {
+    min-height: 44px;
+    padding: 8px 20px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    font-weight: 700;
+
+    &[aria-pressed="true"] {
+      background: $color-primary-strong;
+      color: #fff;
+    }
+  }
+
+  &__list {
+    display: grid;
+    gap: 24px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+
+    @include mq(md) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  padding: 32px 24px;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-m;
+
+  &--featured {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 1px $color-primary, 0 16px 40px rgba($color-primary, 0.2);
+  }
+
+  &__badge {
+    align-self: flex-start;
+    margin-bottom: 8px;
+    padding: 2px 12px;
+    background: $color-primary-strong;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  &__name {
+    font-size: 1.15rem;
+  }
+
+  &__price {
+    margin-top: 16px;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.2;
+
+    small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: $color-text-sub;
+    }
+  }
+
+  &__features {
+    flex: 1;
+    margin: 24px 0;
+    padding: 0;
+    list-style: none;
+    color: $color-text-sub;
+    font-size: 0.95rem;
+
+    li + li {
+      margin-top: 8px;
+    }
+
+    li::before {
+      content: "✓";
+      margin-right: 8px;
+      color: $color-primary;
+    }
+  }
+}
+
+// ---------------------------------------------
+// FAQ（details 要素のアコーディオン）
+// ---------------------------------------------
+.faq {
+  &__list {
+    margin-top: 40px;
+  }
+
+  &__item {
+    border-bottom: 1px solid $color-border;
+
+    summary {
+      position: relative;
+      padding: 20px 40px 20px 0;
+      font-weight: 700;
+      list-style: none;
+      cursor: pointer;
+
+      &::-webkit-details-marker {
+        display: none;
+      }
+
+      &::after {
+        content: "+";
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: $color-primary;
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+      }
+    }
+
+    &[open] summary::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    p {
+      padding-bottom: 20px;
+      color: $color-text-sub;
+    }
+  }
+}
+
+// ---------------------------------------------
+// CTA・フッター
+// ---------------------------------------------
+.cta {
+  text-align: center;
+
+  &__box {
+    padding: 56px 24px;
+    background: linear-gradient(135deg, rgba($color-primary, 0.2), rgba($color-accent, 0.2));
+    border: 1px solid $color-border;
+    border-radius: $radius-l;
+  }
+
+  .btn {
+    margin-top: 32px;
+  }
+}
+
+.footer {
+  padding-block: 40px;
+  border-top: 1px solid $color-border;
+  color: $color-text-sub;
+  font-size: 0.85rem;
+  text-align: center;
+
+  &__note {
+    margin-top: 8px;
+  }
+}
+
+// ---------------------------------------------
+// モーダル（無料体験の申し込み）
+// ---------------------------------------------
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  &.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  &__dialog {
+    position: relative;
+    width: min(100%, 480px);
+    max-height: calc(100svh - 32px);
+    overflow-y: auto;
+    padding: 40px 24px 32px;
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-l;
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.3s ease;
+
+    @include mq(md) {
+      padding: 48px 40px 40px;
+    }
+  }
+
+  &.is-open &__dialog {
+    transform: none;
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    background: transparent;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  &__title {
+    font-size: 1.35rem;
+  }
+
+  &__text {
+    margin-top: 8px;
+    color: $color-text-sub;
+    font-size: 0.9rem;
+  }
+}
+
+.form {
+  display: grid;
+  gap: 20px;
+  margin-top: 24px;
+
+  &__label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  &__input {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+    background: $color-bg;
+    border: 1px solid $color-border;
+    border-radius: $radius-s;
+    color: $color-text;
+    font: inherit;
+
+    &[aria-invalid="true"] {
+      border-color: $color-primary;
+    }
+  }
+
+  &__error {
+    min-height: 1.4em;
+    margin-top: 4px;
+    color: $color-primary;
+    font-size: 0.85rem;
+  }
+
+  &__done {
+    padding: 16px;
+    background: rgba(#3ddc97, 0.12);
+    border: 1px solid rgba(#3ddc97, 0.5);
+    border-radius: $radius-s;
+  }
+}

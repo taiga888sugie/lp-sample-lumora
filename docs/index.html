@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LUMORA（ルモラ）｜ライブも映画もアニメも、ひとつで。【LPコーディングサンプル】</title>
+  <meta name="description" content="ライブ配信・映画・アニメ・舞台をひとつのアプリで楽しめる、架空のエンタメ配信サービス「LUMORA」のLPです。HTML/SCSS/JavaScriptのコーディングサンプルとして制作しました。">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0e0c1a">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LUMORA｜LPコーディングサンプル">
+  <meta property="og:description" content="架空のエンタメ配信サービスのLP。レスポンシブ・スライダー・モーダル・料金切り替えを実装したコーディングサンプルです。">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff5c8a'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "無料体験の期間が終わると、自動で料金がかかりますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "体験期間の終了3日前にメールでお知らせします。マイページから解約すれば料金はかかりません。" }
+      },
+      {
+        "@type": "Question",
+        "name": "スマホとテレビの両方で観られますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "スマートフォン、タブレット、PC、テレビに対応しています。同時に視聴できる台数はプランごとに異なります。" }
+      },
+      {
+        "@type": "Question",
+        "name": "作品をダウンロードしてオフラインで観られますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "スタンダード以上のプランでダウンロード再生に対応しています。" }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へスキップ</a>
+
+  <header class="header js-header">
+    <div class="container header__inner">
+      <a class="header__logo" href="#top">LUMOR<span>A</span></a>
+      <button class="hamburger js-hamburger" type="button" aria-expanded="false" aria-controls="gnav" aria-label="メニューを開く">
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+        <span class="hamburger__line"></span>
+      </button>
+      <nav class="gnav" id="gnav" aria-label="メインメニュー">
+        <ul class="gnav__list">
+          <li><a class="gnav__link" href="#features">特長</a></li>
+          <li><a class="gnav__link" href="#works">作品</a></li>
+          <li><a class="gnav__link" href="#pricing">料金</a></li>
+          <li><a class="gnav__link" href="#faq">よくある質問</a></li>
+          <li><button class="btn btn--primary js-modal-open" type="button">無料で試す</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="hero__orb hero__orb--1"></span>
+        <span class="hero__orb hero__orb--2"></span>
+      </div>
+      <div class="container">
+        <h1 class="hero__title" id="hero-title"><span>ライブも、</span><span>映画も、</span><span>アニメも。</span><br><em>ひとつのアプリで。</em></h1>
+        <p class="hero__lead">見逃したライブ配信のアーカイブから、話題の映画、毎週更新のアニメまで。観たいものを、観たい場所で。</p>
+        <div class="hero__actions">
+          <button class="btn btn--primary js-modal-open" type="button">14日間 無料で試す</button>
+          <a class="btn btn--ghost" href="#works">作品を見る</a>
+        </div>
+        <p class="hero__note">体験期間中に解約すれば、料金はかかりません。</p>
+      </div>
+    </section>
+
+    <section class="section features" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <p class="section__eyebrow">Features</p>
+        <h2 class="section__title" id="features-title">LUMORA が選ばれる3つの理由</h2>
+        <ul class="features__list">
+          <li class="features__item reveal">
+            <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m10 9 5 3-5 3z" fill="currentColor"/></svg>
+            <h3 class="features__title">ライブを見逃さない</h3>
+            <p class="features__text">生配信は終了後7日間、アーカイブで何度でも観られます。</p>
+          </li>
+          <li class="features__item reveal">
+            <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M11 18h2"/></svg>
+            <h3 class="features__title">どの端末でも続きから</h3>
+            <p class="features__text">スマホで途中まで観た作品を、テレビで続きから再生できます。</p>
+          </li>
+          <li class="features__item reveal">
+            <svg class="features__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"/><path d="M4 17v3h16v-3"/></svg>
+            <h3 class="features__title">ダウンロードで通信量ゼロ</h3>
+            <p class="features__text">Wi-Fi で保存しておけば、移動中も通信量を気にせず観られます。</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="works" aria-labelledby="works-title">
+      <div class="container">
+        <p class="section__eyebrow">Pickup</p>
+        <h2 class="section__title" id="works-title">今週のおすすめ</h2>
+        <p class="section__lead">作品名・内容はすべて架空です。</p>
+
+        <div class="slider js-slider" role="region" aria-roledescription="カルーセル" aria-label="今週のおすすめ作品" tabindex="0">
+          <div class="slider__viewport">
+            <ul class="slider__track js-slider-track">
+              <li class="slider__slide" aria-roledescription="スライド">
+                <article class="work">
+                  <div class="work__thumb work__thumb--live" aria-hidden="true">LIVE</div>
+                  <div class="work__body"><p class="work__tag">ライブ配信</p><h3 class="work__title">ミッドナイト・シグナル 全国ツアー最終公演</h3></div>
+                </article>
+              </li>
+              <li class="slider__slide" aria-roledescription="スライド">
+                <article class="work">
+                  <div class="work__thumb work__thumb--movie" aria-hidden="true">MOVIE</div>
+                  <div class="work__body"><p class="work__tag">映画</p><h3 class="work__title">北の灯台と、七つの手紙</h3></div>
+                </article>
+              </li>
+              <li class="slider__slide" aria-roledescription="スライド">
+                <article class="work">
+                  <div class="work__thumb work__thumb--anime" aria-hidden="true">ANIME</div>
+                  <div class="work__body"><p class="work__tag">アニメ・毎週金曜更新</p><h3 class="work__title">星屑ベーカリーの見習い魔女</h3></div>
+                </article>
+              </li>
+              <li class="slider__slide" aria-roledescription="スライド">
+                <article class="work">
+                  <div class="work__thumb work__thumb--stage" aria-hidden="true">STAGE</div>
+                  <div class="work__body"><p class="work__tag">舞台</p><h3 class="work__title">春雷 ― 二人だけの劇場</h3></div>
+                </article>
+              </li>
+              <li class="slider__slide" aria-roledescription="スライド">
+                <article class="work">
+                  <div class="work__thumb work__thumb--music" aria-hidden="true">MUSIC</div>
+                  <div class="work__body"><p class="work__tag">音楽ドキュメンタリー</p><h3 class="work__title">ステージの裏側、365日</h3></div>
+                </article>
+              </li>
+            </ul>
+          </div>
+          <div class="slider__controls">
+            <div class="slider__dots js-slider-dots"></div>
+            <div class="slider__arrows">
+              <button class="slider__arrow js-slider-prev" type="button" aria-label="前のスライド">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <button class="slider__arrow js-slider-next" type="button" aria-label="次のスライド">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing" id="pricing" aria-labelledby="pricing-title">
+      <div class="container">
+        <p class="section__eyebrow">Pricing</p>
+        <h2 class="section__title" id="pricing-title">料金プラン</h2>
+        <p class="section__lead">年額プランは、月額の約2か月分お得です。</p>
+
+        <div class="pricing__toggle" role="group" aria-label="支払い方法">
+          <button class="pricing__toggle-btn js-billing" type="button" data-billing="monthly" aria-pressed="true">月額</button>
+          <button class="pricing__toggle-btn js-billing" type="button" data-billing="yearly" aria-pressed="false">年額</button>
+        </div>
+
+        <ul class="pricing__list" aria-live="polite">
+          <li class="plan reveal">
+            <h3 class="plan__name">ライト</h3>
+            <p class="plan__price"><span data-monthly="980" data-yearly="9800">¥980</span><small class="js-price-unit">/月（税込）</small></p>
+            <ul class="plan__features"><li>同時視聴 1台</li><li>ライブのアーカイブ視聴</li><li>HD 画質</li></ul>
+            <button class="btn btn--ghost btn--block js-modal-open" type="button">ライトで試す</button>
+          </li>
+          <li class="plan plan--featured reveal">
+            <p class="plan__badge">いちばん人気</p>
+            <h3 class="plan__name">スタンダード</h3>
+            <p class="plan__price"><span data-monthly="1480" data-yearly="14800">¥1,480</span><small class="js-price-unit">/月（税込）</small></p>
+            <ul class="plan__features"><li>同時視聴 2台</li><li>ダウンロード再生</li><li>フル HD 画質</li></ul>
+            <button class="btn btn--primary btn--block js-modal-open" type="button">スタンダードで試す</button>
+          </li>
+          <li class="plan reveal">
+            <h3 class="plan__name">プレミアム</h3>
+            <p class="plan__price"><span data-monthly="2180" data-yearly="21800">¥2,180</span><small class="js-price-unit">/月（税込）</small></p>
+            <ul class="plan__features"><li>同時視聴 4台</li><li>4K 画質</li><li>ライブの先行チケット</li></ul>
+            <button class="btn btn--ghost btn--block js-modal-open" type="button">プレミアムで試す</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <p class="section__eyebrow">FAQ</p>
+        <h2 class="section__title" id="faq-title">よくある質問</h2>
+        <div class="faq__list">
+          <details class="faq__item">
+            <summary>無料体験の期間が終わると、自動で料金がかかりますか？</summary>
+            <p>体験期間の終了3日前にメールでお知らせします。マイページから解約すれば料金はかかりません。</p>
+          </details>
+          <details class="faq__item">
+            <summary>スマホとテレビの両方で観られますか？</summary>
+            <p>スマートフォン、タブレット、PC、テレビに対応しています。同時に視聴できる台数はプランごとに異なります。</p>
+          </details>
+          <details class="faq__item">
+            <summary>作品をダウンロードしてオフラインで観られますか？</summary>
+            <p>スタンダード以上のプランでダウンロード再生に対応しています。</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="section cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="cta__box reveal">
+          <h2 class="section__title" id="cta-title">まずは14日間、無料で。</h2>
+          <p class="section__lead">クレジットカードの登録は、体験期間の終了時で大丈夫です。</p>
+          <button class="btn btn--primary js-modal-open" type="button">無料体験をはじめる</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; LUMORA（架空のサービスです）</p>
+      <p class="footer__note">このページは、LPコーディングのサンプルとして制作したものです。サービス名・作品名・料金はすべて架空です。<br>コーディング：杉江 大河（Sidelab）</p>
+    </div>
+  </footer>
+
+  <div class="modal js-modal" aria-hidden="true">
+    <div class="modal__overlay js-modal-close"></div>
+    <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal__close js-modal-close" type="button" aria-label="閉じる">&times;</button>
+      <h2 class="modal__title" id="modal-title">無料体験のお申し込み</h2>
+      <p class="modal__text">サンプルのため、入力内容は送信されません。</p>
+      <form class="form js-form" novalidate>
+        <div>
+          <label class="form__label" for="name">お名前</label>
+          <input class="form__input" id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-error">
+          <p class="form__error" id="name-error" aria-live="polite"></p>
+        </div>
+        <div>
+          <label class="form__label" for="email">メールアドレス</label>
+          <input class="form__input" id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+          <p class="form__error" id="email-error" aria-live="polite"></p>
+        </div>
+        <button class="btn btn--primary btn--block" type="submit">申し込む</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

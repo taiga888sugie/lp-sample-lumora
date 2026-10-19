@@ -1,0 +1,42 @@
+@use "sass:map";
+
+// ---------------------------------------------
+// デザイントークン
+// ---------------------------------------------
+$color-bg: #0e0c1a;
+$color-surface: #1a1730;
+$color-surface-2: #241f42;
+$color-text: #f4f2ff;
+$color-text-sub: #b9b3d9;
+$color-primary: #ff5c8a;
+$color-primary-dark: #b0244f;
+// 白文字を載せる背景用（白とのコントラスト比 4.77:1）
+$color-primary-strong: #d42f68;
+$color-accent: #7c6cff;
+$color-border: rgba(255, 255, 255, 0.12);
+
+$font-base: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic", Meiryo, sans-serif;
+
+$radius-s: 8px;
+$radius-m: 16px;
+$radius-l: 24px;
+
+$header-h: 64px;
+$container: 1120px;
+
+// ブレークポイント（モバイルファースト）
+$bp: (
+  md: 768px,
+  lg: 1024px,
+);
+
+@mixin mq($key) {
+  @media (min-width: map.get($bp, $key)) {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  outline: 3px solid $color-accent;
+  outline-offset: 3px;
+}

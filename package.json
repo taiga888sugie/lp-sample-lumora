@@ -1,0 +1,17 @@
+{
+  "name": "portfolio-lp",
+  "private": true,
+  "version": "1.0.0",
+  "description": "LP コーディングサンプル（架空サービス）",
+  "type": "module",
+  "scripts": {
+    "build:css": "sass src/scss/style.scss docs/css/style.css --style=compressed --no-source-map",
+    "watch:css": "sass src/scss/style.scss docs/css/style.css --watch",
+    "build": "npm run build:css && cp src/js/*.js docs/js/",
+    "lighthouse": "lighthouse http://localhost:8080/ --output=html --output=json --output-path=./reports/lighthouse --chrome-flags=--headless --quiet"
+  },
+  "devDependencies": {
+    "lighthouse": "^12.0.0",
+    "sass": "^1.80.0"
+  }
+}
